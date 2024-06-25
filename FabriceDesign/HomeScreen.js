@@ -15,14 +15,14 @@ import { Ionicons } from "@expo/vector-icons";
 const transactions = [
   {
     id: "1",
-    icon: "apple",
+    icon: "logo-apple",
     name: "Apple Store",
     type: "Entertainment",
     amount: "- $5.99",
   },
   {
     id: "2",
-    icon: "spotify",
+    icon: require("./assets/spotify.png"),
     name: "Spotify",
     type: "Music",
     amount: "- $12.99",
@@ -34,7 +34,13 @@ const transactions = [
     type: "Transaction",
     amount: "$300",
   },
-  { id: "4", icon: "cart", name: "Grocery", type: "", amount: "- $88" },
+  {
+    id: "4",
+    icon: require("./assets/grocery.png"),
+    name: "Grocery",
+    type: "Transaction",
+    amount: "- $88",
+  },
 ];
 
 const HomeScreen = () => {
@@ -43,7 +49,11 @@ const HomeScreen = () => {
   const renderTransactionItem = ({ item }) => (
     <View key={item.id} style={styles.transactionItem}>
       <View style={styles.transactionLeft}>
-        <Ionicons name={item.icon} size={28} color={colors.text} />
+        {typeof item.icon === "string" ? (
+          <Ionicons name={item.icon} size={28} color={colors.text} />
+        ) : (
+          <Image source={item.icon} style={styles.transactionIcon} />
+        )}
         <View style={styles.transactionText}>
           <Text style={[styles.transactionName, { color: colors.text }]}>
             {item.name}
@@ -70,14 +80,14 @@ const HomeScreen = () => {
             Welcome back,
           </Text>
           <Text style={[styles.nameText, { color: colors.text }]}>
-            Eric Atsu
+            Fabrice IHONGUI
           </Text>
         </View>
-        <Ionicons name="ios-search" size={24} color={colors.text} />
+        <Ionicons name="search" size={24} color={colors.text} />
       </View>
 
       <View style={styles.card}>
-        <Image style={styles.cardImage} source={require("./assets/card.png")} />
+        <Image style={styles.cardImage} source={require("./assets/Card.png")} />
       </View>
 
       <View style={styles.actions}>
@@ -107,7 +117,7 @@ const HomeScreen = () => {
             Transactions
           </Text>
           <Button uppercase={false} onPress={() => {}}>
-            Sell All
+            See All
           </Button>
         </View>
         <FlatList
@@ -199,6 +209,11 @@ const styles = StyleSheet.create({
   transactionAmount: {
     fontSize: 16,
     fontWeight: "bold",
+  },
+  transactionIcon: {
+    width: 28,
+    height: 28,
+    resizeMode: "contain",
   },
 });
 
