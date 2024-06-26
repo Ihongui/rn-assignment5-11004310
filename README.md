@@ -1,4 +1,4 @@
-## ID_STIDENT: 11004310 
+## ID_STuDENT: 11004310 
 
 # Brief Description
           Initialize the Project: The project was set up using React Native CLI.
